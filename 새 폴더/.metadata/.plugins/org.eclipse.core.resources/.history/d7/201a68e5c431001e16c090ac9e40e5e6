@@ -1,0 +1,492 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "galmuri";
+    src: url("/resources/fonts/Galmuri9.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "stardust";
+    src: url("/resources/fonts/PF스타더스트.ttf") format("truetype");
+  }
+
+body {
+    font-family: "stardust", sans-serif !important; 
+    font-size: 18px !important;
+    /* font-weight: 600 !important; */
+    position: relative;
+  height: 200vh;
+  margin: 0;
+  padding: 0;
+  
+  }
+
+button.unfollowBtn {
+	border: none;
+	width: 88px;
+	height: 40px;
+	background-color: #efefef;
+	color: black;
+	border-radius: 20px;
+	font-weight: 600;
+	font-size: 17px;
+	
+}
+button.unfollowBtn:hover{
+	background-color: #dadada;
+}
+
+.followBtn {
+	border: none;
+	width: 88px;
+	height: 40px;
+	background-color: #e60023;
+	color: white;
+	border-radius: 20px;
+	font-weight: 600;
+	font-size: 17px;
+}
+
+.followBtn:hover{
+	background-color: #a3081a;
+}
+
+.pp {
+	break-inside: avoid;
+	margin-bottom: 20px;
+}
+
+.foot {
+	width: 100vw;
+	height: 100px;
+	background-color: rgba(0, 100, 100, 0.5);
+	clear: both;
+}
+
+.contentBox {
+	width: 236px;
+	height: auto;
+	border-radius: 10px;
+	position: relative;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+	transition: box-shadow 0.3s ease;
+	cursor: pointer;
+	background-color: rgba(255, 255, 255, 0.2);
+	color: white;
+}
+
+.bigBox {
+	column-count: 6;
+	column-gap: 20px;
+	position: absolute;
+	width: 1512px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.mybox{
+	background-image: url(/resources/images/user/mypage.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* background-color: white;
+	border-radius: 25px; */
+	width: 880px;
+	height: 506px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 50px;
+	
+  }
+
+  .inforbox{
+	/* display: inline-block; */
+	float: left;
+	width: 550px;
+	height: 300px;
+	align-items: center;
+	display: flex;
+	margin-top: 50px;
+	box-sizing: border-box;
+	
+  }
+
+  .imgbox{
+	margin-top: 50px;
+	border-right: solid 1px rgb(114, 114, 114);
+	/* display: inline-block; */
+	float: left;
+	width: 300px;
+	height: 300px;
+	/* text-align: center; */
+	
+  }
+
+  .myuser{
+	width: 200px;
+	margin-left: 60px;
+	text-align: center;
+  }
+
+  .secondbox{
+	margin-left: 60px;
+  }
+
+  .usercontent{
+	margin-bottom: 40px;
+	width: 450px;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	word-wrap: break-word; 
+  }
+
+  .btnZone{
+	display: flex;
+	text-align: center;
+	padding-top: 80px;
+	width: 880px;
+	justify-content: center;
+  }
+
+  .followcnt{
+	margin-top: 40px;
+	margin-bottom: 50px;
+	font-size: 20px;
+	font-weight: 700;
+  }
+
+  .tagbox{
+	line-height: 30px;
+  }
+
+#mytag:hover{
+	color: black;
+}
+
+@media ( max-width : 1600px) {
+	.bigBox {
+		width: 1260px;
+		column-count: 5;
+	}
+}
+
+@media ( max-width : 1350px) {
+	.bigBox {
+		width: 1008px;
+		column-count: 4;
+	}
+}
+
+@media ( max-width : 1100px) {
+	body{
+		height: 300vh;
+	}
+	.bigBox {
+		width: 756px;
+		column-count: 3;
+	}
+
+	.mybox{
+		width: 506px;
+		height: 780px;
+		background-image: url(/resources/images/user/mypageh.png);
+		background-size: 506px 780px;
+		background-repeat: no-repeat;
+	}
+
+	.imgbox{
+		margin-top: 30px;
+		border-right: none;
+		/* display: inline-block; */
+		
+		width: 506px;
+		height: 300px;
+		/* text-align: center; */
+		
+	  }
+
+	  .inforbox{
+		float: left;
+		width: 506px;
+		height: 380px;
+		align-items: center;
+		display: flex;
+		margin-top: 0px;
+		box-sizing: border-box;
+		text-align: center;
+	  }
+
+	  .myuser{
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 200px;
+		margin: 0 0 0 0;
+		text-align: center;
+	  }
+
+	  .secondbox{
+		margin: 0 0 0 0;
+		width: 506px;
+		
+	  }
+
+	  .usercontent{
+		margin-bottom: 40px;
+		width: 100%;
+		height: 100px;
+		display: block;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+		padding-left: 50px;
+		padding-right: 50px;
+	  }
+
+	  .btnZone{
+		display: flex;
+		text-align: center;
+		padding: 0 0 0 0;
+		width: 506px;
+		justify-content: center;
+	  }
+
+	  .followcnt{
+		margin-top: 0px;
+		margin-bottom: 50px;
+		font-size: 20px;
+		font-weight: 700;
+	  }
+
+
+}
+
+@media ( max-width : 850px) {
+	.bigBox {
+		width: 504px;
+		column-count: 2;
+	}
+}
+
+@media ( max-width : 600px) {
+	.bigBox {
+		width: 252px;
+		column-count: 1;
+	}
+}
+
+.hiddenText {
+	display: none;
+}
+
+.minBox {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 10px;
+	font-size: 20px;
+	color: #ff0080;
+}
+
+.thumbnail {
+	width: 236px;
+	height: auto;
+	border-radius: 10px;
+}
+
+.titleBox {
+	font-size: 50px;
+	border-radius: 10px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 5%;
+}
+
+.overlayBox {
+	border: 2px solid white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.contentBox:hover .overlayBox {
+	display: block;
+}
+
+.profile {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+}
+
+.profile img {
+	border-radius: 50%;
+}
+
+.btnZone > .ulbutton {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	
+  }
+  
+  .ulbutton > li {
+	display: inline-block;
+	margin-right: 10px; /* 필요에 따라 간격 조정 */
+  }
+  
+  .ulbutton > li:hover {
+	background-color: rgba(128, 128, 128, 0.527);
+  }
+
+  .selected{
+	text-shadow: rgb(71, 71, 71) 2px 2px 2px;
+	font-weight: 700;
+  }
+
+  .mybox::after{
+	content: "";
+	display: block;
+	clear: both;
+  }
+  
+
+
+
+  
+
+  .myuser > h3{
+	margin-top: 20px;
+	margin-bottom: 0;
+  }
+
+  .username{
+	font-size: 15px;
+	color: rgb(102, 100, 100);
+  }
+
+  #followZone{
+	margin-top: 40px;
+	margin-bottom: 20px;
+  }
+#followZone > a > button{
+	width: 110px;
+	height: 48px;
+	border: none;
+	border-radius: 24px; 
+	background-color: rgb(60, 231, 60);
+	/* background-image: url(/resources/images/user/버튼3.png);
+	background-size: cover;
+	background-repeat: no-repeat; */
+	font-weight: 600;
+	font-size: 17px;
+	
+}
+#followZone > a > button:hover{
+	background-color: rgb(42, 207, 97);
+}
+
+
+
+  #profileimg{
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	
+  }
+
+
+
+
+  #mytag{
+	color: rgb(199, 197, 197);
+  }
+
+  .spancontent{
+	width: 450px;
+	height: 100px;
+	align-items: center;
+  }
+
+  .contentZone{
+	margin-top: 50px;
+  }
+
+  .nothing{
+	margin-top: 100px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+  }
+
+  .nothing > h2{
+	margin-bottom: 20px;
+	color: white;
+  }
+
+  .nothing > a > button{
+	width: 110px;
+	height: 48px;
+	border: none;
+	border-radius: 24px; 
+	/* background-color: #efefef;
+	/* background-image: url(/resources/images/user/버튼3.png);
+	background-size: cover;
+	background-repeat: no-repeat; */
+	font-weight: 600;
+	font-size: 17px;
+  }
+  .nothing > a > button:hover{
+	background-color: #dadada;
+  }
+
+  .underlinedeco{
+	width: 100%;
+	height: 3px;
+	border-radius: 1.5px;
+	background-color: rgb(71, 71, 71);
+  }
+
+  #followingtable{
+	width: 100%;
+	/* text-align: center; */
+  }
+  #followertable{
+	width: 100%;
+  }
+
+  .followimg{
+	width: 80px;
+  }
+  .followimg > img{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+  }
+
+  .followname{
+	width: 280px;
+	text-align: left;
+	
+  }
+
+  .followname > a{
+	color: black !important ;
+  }
+
+  .followbutton{
+	text-align: center;
+  }
+
+ 
+

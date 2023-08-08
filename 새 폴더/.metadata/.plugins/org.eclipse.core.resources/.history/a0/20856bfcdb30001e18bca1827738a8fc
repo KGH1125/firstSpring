@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.markup.www.repository.BoardDAO">
+
+	<insert id="insert"
+		parameterType="com.markup.www.domain.BoardVO">
+		insert into board(title, id, b_content, b_tag)
+		values(#{title}, #{id}, #{bcontent}, #{btag})
+	</insert>
+
+	<select id="getList" resultType="com.markup.www.domain.BoardVO">
+		select *
+		from (
+		select bno
+		from board
+		where is_del = 0
+		<include refid="search"></include>
+		group by bno
+		order by bno desc
+		limit #{pageStart}, #{qty}
+		) a
+		left join
+		board b on a.bno = b.bno
+	</select>
+
+	<select id="getBoardLike" resultType="String">
+		select like_user
+		from board
+		where bno = #{bno}
+	</select>
+
+	<select id="getPopList" resultType="com.markup.www.domain.BoardVO">
+	  select *
+	  from (
+	    select bno
+	    from board
+	    where is_del = 0 and reg_date > #{date} and like_user like '#%'
+	    group by bno
+	    order by reg_date desc
+	    limit #{pageStart}, #{qty}
+	  ) a
+	  left join board b on a.bno = b.bno
+	</select>
+
+
+	<select id="selectBno" resultType="int">
+		select max(bno)
+		from board
+	</select>
+
+	<select id="getDetail"
+		resultType="com.markup.www.domain.BoardVO">
+		select *
+		from board
+		where bno = #{bno}
+	</select>
+
+	<select id="getblacklist"
+		resultType="com.markup.www.domain.BoardVO">
+		select * from board where black >= 5; <!-- 신고회수가 5이상인 게시글 가져온다. -->
+	</select>
+
+	<update id="updateLikeUser">
+		update board
+		set like_user = #{likeUser}
+		where bno
+		= #{bno}
+	</update>
+
+	<update id="updateBoard">
+		update board		set title = #{title}, b_content =
+		#{bcontent}, reg_date = now(), b_tag=#{btag}
+		where bno = #{bno}
+	</update>
+
+	<update id="deleteBoard">
+		delete from board
+		where bno = #{bno}
+	</update>
+
+	<update id="restoreBoard">
+		update board set is_Del=0 where bno=#{bno};
+	</update>
+
+	<sql id="search">
+		<if test="keyword != null">
+			<trim prefix="and (" suffix=")" suffixOverrides="or">
+				<foreach collection="keywordArray" item="keyword"
+					separator=" ">
+					title like concat('%', #{keyword}, '%') or
+					id like	concat('%', #{keyword}, '%') or
+					b_content like concat('%',#{keyword}, '%') or
+					b_tag like concat('%', #{keyword}, '%') or
+				</foreach>
+			</trim>
+		</if>
+	</sql>
+
+	<select id="getlikeList" resultType="com.markup.www.domain.BoardVO">
+		select *
+		from (
+		select bno
+		from board
+		where is_del = 0 and
+		like_user like concat('%', #{keyword}, '%')
+		group by bno
+		order by bno desc
+		limit #{pageStart}, #{qty}
+		) a
+		left join
+		board b on a.bno = b.bno
+	</select>
+	<select id="getpostList" resultType="com.markup.www.domain.BoardVO">
+	select *
+		from (
+		select bno
+		from board
+		where is_del = 0 and
+		id=#{keyword}
+		group by bno
+		order by bno desc
+		limit #{pageStart}, #{qty}
+		) a
+		left join
+		board b on a.bno = b.bno
+	</select>
+	<update id="BlackPlus" parameterType="int">
+	update board set black = black+1 where bno = #{bno}
+	</update>
+</mapper>

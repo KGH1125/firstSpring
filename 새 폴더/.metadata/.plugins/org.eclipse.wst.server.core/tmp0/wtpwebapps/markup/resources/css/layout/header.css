@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a:visited {
+	color: white;
+}
+
+.headerMain {
+	background-color: rgba(50, 50, 50, 0.5);
+	position: fixed;
+	z-index: 100;
+	padding: 18px;
+	width: 100%;
+}
+
+.headdiv {
+	display: inline-block;
+	border: 1px solid black;
+}
+
+.alarmBox {
+	width: 384px;
+	height: 300px;
+	background-color: white;
+	z-index: 101;
+	position: fixed;
+	margin-top: 4px;
+	overflow: auto;
+}
+
+body {
+	background-image: url("/resources/images/layout/headerImg/배경.png");
+}
+
+.rbox {
+	float: right;
+}
+
+.hiddenBox {
+	display: none;
+}
+
+.minAlarmBox {
+	color: black;
+	padding: 8px;
+	border-bottom: 1px solid black;
+	/* background-color: rgba(0, 255, 0, 0.5); */
+}
+
+.minAlarmBox a {
+	color: #084298;
+}
+
+.alarmHead {
+	width: 100%;
+	height: 30px;
+	color: black;
+	text-align: center;
+	border-bottom: 1px solid black;
+}
+
+.zeroAlarm {
+	text-align : center;
+	color: black;
+	margin-top: 10px;
+}
+
+.headerSpace {
+	width: 100%;
+	height: 64px;
+	padding-left: 10px;
+	padding-top: 10px;
+	margin-bottom: 20px;
+}
+
+.headerLogo {
+	width: 250px;
+	height: 100%;
+	background-image: url("/resources/images/layout/headerImg/logo.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.okcheckBox {
+	color: gray;
+	background-color: #c7c7c7;
+}
+
+nav {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	justify-content: center;
+	z-index: 100;
+	transform: translateX(-50%);
+	color: white;
+	width: 384px;
+}
+
+.headerHome {
+	background-image: url("/resources/images/layout/headerImg/나침반.png");
+	background-size: cover;
+}
+
+.headerPopList {
+	background-image: url("/resources/images/layout/headerImg/모닥불.png");
+	background-size: cover;
+}
+
+.headerRegister {
+	background-image: url("/resources/images/layout/headerImg/책과 깃펜.png");
+	background-size: cover;
+}
+
+.headerAlarm {
+	background-image: url("/resources/images/layout/headerImg/종.png");
+	background-size: cover;
+}
+
+.headerSerch {
+	background-image: url("/resources/images/layout/headerImg/돋보기.png");
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.headerMenu {
+	background-image: url("/resources/images/layout/headerImg/책장.png");
+	background-size: cover;
+}
+
+#searchInput {
+	padding-left: 5px;
+	width: 100%;
+	border: none;
+}
+
+.inputdiv {
+	width: 330px;
+	display: inline-block;
+}
+
+.serchBtn {
+	width: 38px;
+	float: right;
+}
+
+.lidiv {
+	width: 90%;
+	height: 90%;
+	margin: 5%;
+	padding: 0;
+}
+
+.hb {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.collbox {
+	margin-top: 10px;
+	width: 100%;
+	float: left;
+	width: 100%;
+}
+
+.countAlarm {
+	background-color: #f54347;
+	color: white;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+	margin: 2px;
+	text-align: center;
+	font-size: 11px;
+	position: absolute;
+}
+/* 말풍선 */
+.headerContainer {
+	position: relative;
+	display: inline-block;
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 64px;
+	height: 64px;
+	cursor: pointer;
+	border: 4px solid #c0c0c0;
+	box-shadow: inset 2px 2px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.arrow_box {
+	margin-top: 10px;
+	display: none;
+	position: absolute;
+	width: 60px;
+	padding: 8px;
+	left: 0;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	background: white;
+	color: black;
+	font-size: 14px;
+	text-align: center;
+	display: none;
+	padding: 8px;
+}
+
+.card-body {
+	padding: 3px;
+}
+
+.arrow_box:after {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	margin-left: -10px;
+	border: solid transparent;
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: white;
+	border-width: 10px;
+	pointer-events: none;
+	content: ' ';
+}
+
+.headerContainer:hover .arrow_box {
+	display: block;
+}
+
+.drdn-btnDiv {
+	width: 100%;
+	height: 100%
+}
+
+.dropdown-menu {
+	margin-top: 10px;
+}
+
+.dropdown-menu a {
+	color: black;
+}

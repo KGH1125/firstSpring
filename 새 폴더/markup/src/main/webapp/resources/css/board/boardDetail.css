@@ -1,0 +1,469 @@
+@font-face {
+    font-family: "galmuri";
+    src: url("/resources/fonts/Galmuri9.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "stardust";
+    src: url("/resources/fonts/PF스타더스트.ttf") format("truetype");
+  }
+
+
+body {
+  font-family: "stardust", sans-serif !important; 
+  font-size: 18px !important;
+  /* font-weight: 600 !important; */
+  position: relative;
+  height: 3000px;
+  margin: 0;
+  padding: 0;
+  
+  }
+
+.container1 {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  background: white;
+  border-radius: 30px;
+  height: 900px;
+  width: 1300px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* margin-top: 50px; */
+  margin-bottom: 50px;
+}
+
+.toggle {
+        cursor: pointer;
+    }
+
+
+.back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 25px;
+  color : white;
+  cursor: pointer;
+  
+}
+
+textarea {
+	border-radius: 10px;
+}
+
+
+.imageBox {
+	margin-left: 10px;
+}
+
+img {
+  border-radius: 10px;
+}
+
+
+.mainImg {
+	height: 500px;
+	width: 500px;
+}
+
+.thImg {
+	height: 75px;
+	width: 75px;
+}
+
+.boardBoxn {
+	width: 1200px;
+	height: 800px;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+
+}
+
+/* .carousel-item img {
+  width: 100%;
+  height: auto;
+}
+ */
+
+.thBox {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+}
+
+.thumb {
+	flex: 0 0 auto;
+	margin-right: 10px;
+	position: relative;
+  display: inline-block;
+}
+
+
+.dropBox {
+	width: 600px;
+	height: 635px;
+	margin: .6rem;
+	overflow: auto;
+	/* display: flex;
+	justify-content: center;
+	align-items: center; */
+	border-radius: 30px;
+	border: 4px dashed #ddd;
+	position: relative;
+	z-index: 1; 
+	float: left;
+}
+
+.tagdivn{
+	width: 600px;
+	height: 30px;
+
+}
+.tagdivn > a{
+	color: gray;
+}
+
+.tagdivn > a:hover{
+	color: black;
+}
+.tagdivn >a:visited{
+	color: gray;
+}
+.idbox{
+	font-weight: 700;
+	margin-right: 10px;
+
+}
+#cmtListArea li a{
+	color: black;
+}
+#cmtListArea li a:visited{
+	color: black;
+}
+.datebox > span{
+	font-size: 13px;
+	color: gray;
+}
+.menu{
+	margin-left: 15px;
+	font-size: 15px !important;
+	color: rgb(80, 80, 80) !important;
+}
+
+.cmtListArean{
+width: 600px;
+height: 400px;
+overflow: auto;
+border-bottom: 1px solid lightgray;
+}
+.commentBoxn{
+
+	width: 600px;
+	height: 100px;
+	margin-top:20px;
+}
+.inforbox{
+	width: 100%;
+	height: 40px;
+}
+.boardinfor{
+width: 600px;
+height: 40px;
+float: left;
+}
+.boardwriter{
+width: 600px;
+float: left;
+text-align: right;
+}
+.boardwriter > a{
+	color: black;
+}
+.boardwriter > a:visited{
+	color: black;
+}
+.boardwriter > a:hover{
+	color: black;
+}
+.btncss{
+	border: 1px solid gray;
+	border-radius: 20px;
+	width: 50px;
+	height: 30px;
+   
+  }
+  .btncss:hover:not([disabled]){
+	background-color: gray;
+	
+	width: 50px;
+	height: 30px;
+	color: white;
+  }
+
+/* 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+	/* 화면 너비가 768px 이하일 때 적용되는 스타일 */
+	/* .container {
+		flex-direction: column;
+		align-items: center;
+	} */
+
+	.boardBox {
+		margin-bottom: 10px;
+	}
+	
+	.dropBox {
+	width: 500px;
+	height: 700px;	
+	}
+}
+
+.preview-image {
+	width: 500px;
+	height: 500px;
+}
+
+#cmtListArea > li {
+  margin-bottom: 20px;
+  list-style: none; 
+  /* margin: 0; */
+  padding: 0; 
+}
+
+.button-div{
+	width: 150px;
+	height: 40px;
+	float: right;
+	text-align: right;
+	margin-right: 10px;
+}
+
+.modify-delete-buttons {
+  /* ... 다른 스타일 ... */
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.pp {
+	break-inside: avoid;
+	margin-bottom: 20px;
+}
+
+.foot {
+	width: 100vw;
+	height: 100px;
+	background-color: rgba(0, 100, 100, 0.5);
+	clear: both;
+}
+
+.contentBox {
+	width: 236px;
+	height: auto;
+	border-radius: 10px;
+	position: relative;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+	transition: box-shadow 0.3s ease;
+	cursor: pointer;
+	background-color: rgba(255, 255, 255, 0.2);
+	color: white;
+}
+
+.bigBox {
+	column-count: 6;
+	column-gap: 20px;
+	position: absolute;
+	width: 1512px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* 이미지 없을 때 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.textcontentn{
+	border: 1px solid black;
+	width: 600px;
+	height: 600px;
+	float: left;
+	/* position: relative;
+	left: 50%;
+	
+	transform: translateX(-50%); */
+	}
+
+.inforboxn{
+	
+}
+
+.commentbboxn{
+	width: 600px;
+	height: 600px;
+	float: left;
+
+}
+.cmtboxn{
+	width: 400px;
+	float: left;
+	margin-left: 20px;
+}
+.cmtidboxn{
+/* float: left; */
+margin-left: 20px;
+margin-bottom: 10px;
+}
+
+.cmtbtnsn{
+	float: left;
+	margin-left: 10px;
+}
+
+
+	/* 이미지 있을 때 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+
+
+
+@media ( max-width : 1600px) {
+	.bigBox {
+		width: 1260px;
+		column-count: 5;
+	}
+}
+
+@media ( max-width : 1350px) {
+	.bigBox {
+		width: 1008px;
+		column-count: 4;
+	}
+}
+
+@media ( max-width : 1100px) {
+	.bigBox {
+		width: 756px;
+		column-count: 3;
+	}
+}
+
+@media ( max-width : 850px) {
+	.bigBox {
+		width: 504px;
+		column-count: 2;
+	}
+}
+
+@media ( max-width : 600px) {
+	.bigBox {
+		width: 252px;
+		column-count: 1;
+	}
+}
+
+.hiddenText {
+	display: none;
+}
+
+.minBox {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 10px;
+	font-size: 20px;
+	color: #ff0080;
+}
+
+.thumbnail {
+	width: 236px;
+	height: auto;
+	border-radius: 10px;
+}
+
+.titleBox {
+	font-size: 50px;
+	border-radius: 10px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 5%;
+}
+
+.overlayBox {
+	border: 2px solid white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.contentBox:hover .overlayBox {
+	display: block;
+}
+
+.profile {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+}
+
+.profile img {
+	border-radius: 50%;
+}
+
+.notFoundList {
+	margin-top: 20vh;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	color: white;
+}
+
+.notFoundList > h2{
+	font-size: 36px;
+}
+.notFoundList span{
+	font-size: 30px;
+}
+
+/* #listBlackBtn {
+	top: 10px;
+	right: 10px;
+	font-size: 12px;
+	position: absolute;
+} */
+
+.listzone{
+  margin-top: 100px;
+  position: relative;
+top: 900px;
+
+}
+
+#cmtWriter{
+	margin-left: 10px;
+	font-weight: 600;
+}
+
+#emojiBtn{
+	margin-right: 5px;
+}
+
+.profilecss{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-right: 10px;
+}

@@ -1,0 +1,277 @@
+@charset "UTF-8";
+@font-face {
+    font-family: "galmuri";
+    src: url("/resources/fonts/Galmuri9.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "stardust";
+    src: url("/resources/fonts/PF스타더스트.ttf") format("truetype");
+  }
+
+body {
+    font-family: "stardust", sans-serif !important;
+    font-size: 16px;
+    font-weight: 600;
+    position: relative;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-repeat: repeat;
+  animation-name: waveAnimation;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  background-image: url("/resources/images/user/bgimg.png") !important;
+  }
+
+  @keyframes waveAnimation {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 768px 576px;
+    }
+  }
+  
+
+  .joinbox{
+   
+    margin-top: 35px;
+		background-image: url(/resources/images/user/mypageh.png);
+		/* background-size: 506px 780px; */
+		background-repeat: no-repeat;
+    background-size: 600px 870px;
+    width: 600px;
+    height: 870px;
+    position: absolute;
+  left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  } 
+
+  .jointitle{
+    float: left;
+    width: 100px;
+    margin-left: 30px;
+    
+  }
+
+  .boxbox{
+   margin-bottom: 10px;
+  }
+
+  .imgbox{
+    margin-top: 20px;
+    width: 150px;
+    height: 150px;
+    background-color:rgba(173, 216, 230, 0.712);
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px 10px 10px 10px;
+    margin-bottom: 20px;
+   
+  }
+
+  #previewbox{
+    margin-bottom: 10px;
+  }
+  
+  .profile_img{
+    margin-right: 15px;
+    width: 80px;
+    height: 80px;
+  }
+
+  #preview{
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+  }
+
+  #choiceImg{
+    width: 600px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  #mypic{
+    border: 1ps solid black;
+    width: 80px;
+    height: 80px;
+  }
+
+  .profileBtn{
+    margin-bottom: 10px;
+  }
+
+  .tagbox{
+    position: absolute;
+    width: 433px;
+    height: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 40px;
+  }
+
+  .tagbox > label{
+    width: 85px;
+   
+  }
+
+  .tagbox > label> input{
+    margin-right: 5px;
+  }
+
+  #formBtn{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 30px;
+    width: 70px;
+    height: 40px;
+    border: none;
+    border-radius: 24px; 
+    background-color: rgb(60, 231, 60);
+    
+    font-weight: 600;
+    font-size: 17px;
+
+  }
+ 
+  #formBtn:hover{
+    background-color: rgb(42, 207, 97);
+  }
+
+  .pwchangeBtn{
+    margin-top: 40px;
+    width: 200px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .pwchangeBtn > a{
+    font-weight: 600;
+    font-size: 18px;
+    color: gray;
+    
+    
+  }
+
+  .pwchangeBtn > a:hover{
+    
+    font-size: 18px;
+    color: rgb(80, 80, 80);
+    
+  }
+
+  /* .mb-3{
+    text-align: center;
+  }*/
+  .form-control{
+    letter-spacing: 5px;
+  } 
+
+  .ulbox > li{
+    list-style: none;
+    margin-bottom: 10px;
+  }
+
+  #resultMent > h4{
+    margin-bottom: 30px;
+  }
+  .accordion{
+    --bs-accordion-bg: lightgray !important;
+    --bs-accordion-active-bg: gray !important;
+    --bs-accordion-active-color:white !important;
+
+  }
+
+  .joinbox > form{
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .tagacc{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+
+.joinbox  h3 > img{
+  width: 50px;
+}
+
+form h3 {
+  width: 200px;
+ 
+  border-radius: 10px;
+}
+
+.middlebox{
+  width: 500px;
+  height: 800px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.modifyinputbox{
+  margin-bottom: 50px;
+}
+
+.btncss{
+  border: 1px solid gray;
+  border-radius: 20px;
+  width: 50px;
+  height: 30px;
+ 
+}
+
+.btncss:hover:not([disabled]){
+  background-color: gray;
+  
+  width: 50px;
+  height: 30px;
+  color: white;
+}
+
+#confirmbtn{
+  position: relative;
+  left: 70%;
+  color: lightgray;
+}
+
+#confirmbtn:hover{
+  cursor: pointer;
+}
+
+
+
+
+@media ( max-width : 992px) {
+  .profile_img{
+    margin-right: 15px;
+    width: 60px;
+    height: 60px;
+  }
+
+  #mypic{
+    width: 60px;
+    height: 60px;
+    margin-right: 0;
+  }
+
+  #choiceImg{
+    width: 449px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+  }
+}
+
+

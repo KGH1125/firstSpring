@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: "galmuri";
+	src: url("/resources/fonts/Galmuri9.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "stardust";
+	src: url("/resources/fonts/PF스타더스트.ttf") format("truetype");
+}
+
+body {
+	font-family: "stardust", sans-serif !important;
+	font-size: 18px !important;
+	height: 3000px;
+}
+
+.pp {
+	break-inside: avoid;
+	margin-bottom: 20px;
+}
+
+.foot {
+	width: 100vw;
+	height: 100px;
+	background-color: rgba(0, 100, 100, 0.5);
+	clear: both;
+}
+
+.contentBox {
+	width: 236px;
+	height: auto;
+	border-radius: 10px;
+	position: relative;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+	transition: box-shadow 0.3s ease;
+	cursor: pointer;
+	background-color: rgba(255, 255, 255, 0.2);
+	color: white;
+}
+
+.bigBox {
+	column-count: 6;
+	column-gap: 20px;
+	position: absolute;
+	width: 1512px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+@media ( max-width : 1600px) {
+	.bigBox {
+		width: 1260px;
+		column-count: 5;
+	}
+}
+
+@media ( max-width : 1350px) {
+	.bigBox {
+		width: 1008px;
+		column-count: 4;
+	}
+}
+
+@media ( max-width : 1100px) {
+	.bigBox {
+		width: 756px;
+		column-count: 3;
+	}
+}
+
+@media ( max-width : 850px) {
+	.bigBox {
+		width: 504px;
+		column-count: 2;
+	}
+}
+
+@media ( max-width : 600px) {
+	.bigBox {
+		width: 252px;
+		column-count: 1;
+	}
+}
+
+.hiddenText {
+	display: none;
+}
+
+.minBox {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 10px;
+	font-size: 20px;
+	color: #ff0080;
+}
+
+.thumbnail {
+	width: 236px;
+	height: auto;
+	border-radius: 10px;
+}
+
+.titleBox {
+	font-size: 50px;
+	border-radius: 10px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 5%;
+}
+
+.overlayBox {
+	border: 2px solid white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.contentBox:hover .overlayBox {
+	display: block;
+}
+
+.profile {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+}
+
+.profile img {
+	border-radius: 50%;
+}
+
+.notFoundList {
+	margin-top: 40vh;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	color: white;
+}
+
+#listBlackBtn {
+	top: 10px;
+	right: 10px;
+	font-size: 12px;
+	position: absolute;
+}
+
+#fullScreenDiv {
+    font-size: 100px;
+    text-align: center;
+
+	text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    color: rgb(255, 119, 28);
+    position: fixed;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    display: none; /* 페이지 로딩 시 디브를 숨깁니다. */
+    z-index: 9999; /* 다른 요소들보다 위에 띄우기 위해 z-index 설정 */
+  }

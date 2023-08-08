@@ -1,0 +1,99 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>글 수정</title>
+
+  <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+  <link href="/resources/css/board/boardRegister.css" rel="stylesheet" />
+
+  <meta name="viewport" content="width=device-widtsh, initial-scale=1.0">
+</head>
+
+<body>
+  <jsp:include page="../layout/header.jsp"></jsp:include>
+
+  <form action="/board/modify" method="post" enctype="multipart/form-data">
+    <c:set var="board" value="${boardDTO.bvo }" />
+    <c:set var="tagList" value="${tagList }" />
+    <c:set var="thLoop" value="0" />
+    <input hidden="hidden" name="bno" value="${board.bno }">
+
+    <div class="container">
+      <div class="dropBox" class="dropBox">
+        <div class="imageBox" id="imageZone">
+          <c:choose>
+            <c:when test="${fList.size() == 0 }">
+              등록된 이미지가 없습니다
+            </c:when>
+            <c:otherwise>
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false">
+                <ol class="carousel-indicators" id="carousel-indicators">
+                  <c:forEach items="${fList}" var="fvo" varStatus="loop">
+                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${loop.index}" <c:if test="${loop.first}">class="active"</c:if>></li>
+                  </c:forEach>
+                </ol>
+
+                <div class="carousel-inner" id="carousel-inner">
+                  <c:forEach items="${fList}" var="fvo" varStatus="loop">
+                    <div class="carousel-item imgItem <c:if test="${loop.first}">active</c:if>" data-uuid="${fvo.uuid }">
+                      <img src="/upload/${fn:replace(fvo.saveDir, '\\', '/')}/${fvo.uuid}_${fvo.fileName}" class="d-block w-100" alt="..." style="width: 500px; height: 500px;"> <br>
+                    </div>
+                  </c:forEach>
+                </div>
+
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev" id="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </a>
+                <a class="carousel-control-next" id="next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </a>
+              </div>
+
+              <div class="thBox" id="thBox">
+                <c:forEach items="${fList}" var="fvo">
+                  <div class="thumb" data-uuid="${fvo.uuid }">
+                    <img src="/upload/${fn:replace(fvo.saveDir, '\\', '/')}/${fvo.uuid}_th_${fvo.fileName}" class="thImg " style="width: 75px; height: 75px;" id="${thLoop}">
+                    <button class="delete-button oldBtn" id="delBtn">x</button>
+                  </div>
+                  <c:set var="thLoop" value="${thLoop + 1}" />
+                </c:forEach>
+              </div>
+            </c:otherwise>
+          </c:choose>
+        </div>
+
+        <input type="file" class="file-input" id="file" name="files" multiple style="display: none">
+        <button type="button" id="trigger" class="btn btn-secondary">이미지 변경</button>
+      </div>
+      <!-- image Zone -->
+
+      <div id="boardBox" class="boardBox">
+        <input type="text" name="id" id="id" value="${ses.id }" readonly class="form-control-plaintext" hidden="hidden">
+        <input type="text" name="title" class="titleInputBox" id="title" value="${board.title }" placeholder="제목을 입력해주세요">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="작성자 : ${ses.name }" hidden="hidden">
+        <textarea rows="12" cols="40" class="contentInputBox"  name="bcontent" id="bcontent">${board.bcontent}</textarea>
+        <input name='btag' id="btag" value="${tagList }" data-blacklist='.NET,PHP' placeholder="#을 입력하여 태그를 추가해 보세요">
+        <button type="submit" id="regBtn" class="btn btn-outline-secondary">저장</button>
+      </div>
+      <!-- boardBox div -->
+
+      <div style="clear: both;"></div>
+    </div>
+    <!-- container -->
+  </form>
+
+  <script src="https://unpkg.com/@yaireo/tagify"></script>
+  <script type="text/javascript">
+    const fList = '<c:out value="${boardDTO.FList}" />';
+    const tagList = '<c:out value="${tagList} " />';
+  </script>
+  <script type="text/javascript" src="/resources/js/board/boardModify.js"></script>
+</body>
+</html>

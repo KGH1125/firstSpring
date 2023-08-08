@@ -1,0 +1,629 @@
+getCommentList(bnoVal);
+
+let lastid = 19; // 마지막으로 만들어진 div id
+let isHandlingScroll = false; // 중복 실행 방지를 위한 변수
+const qty = 20; // 한 번에 생성할 박스 개수
+let pag = 2; // 불러올 시작 페이지
+
+function handleScroll() {
+  if (isHandlingScroll) {
+    return; // 이미 실행 중인 경우, 더 이상의 처리를 하지 않고 종료
+  }
+  isHandlingScroll = true; // 실행 중 표시
+  let myDiv = document.getElementById('box' + lastid);
+  if (myDiv) {
+    let rect = myDiv.getBoundingClientRect();
+    let windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    let viewportY = (windowHeight / 4) * 3;
+    if (rect.top + rect.height / 2 < viewportY) {
+      console.log('div' + lastid + '가 화면의 중앙보다 위에 있습니다.');
+      let keyword = document.getElementById("searchInput").getAttribute("data-keyword"); // 검색어 가져오기
+      getBoardList(pag,keyword,qty).then((BoardUserDTO)=>{
+        if (BoardUserDTO === null || BoardUserDTO === undefined || BoardUserDTO.length === 0) {
+          console.log("BUDTO값이 없습니다.");
+          return;
+        }else{
+          for(let i = 0; i<BoardUserDTO.length ; i++){
+            let previousDiv = document.getElementById(`box${lastid}`);//마지막으로 만들어진 div
+            
+            const bvo = BoardUserDTO[i].bvo;
+            const uvo = BoardUserDTO[i].uvo;
+            let fvo;
+            if (BoardUserDTO[i].flist === undefined || BoardUserDTO[i].flist.length  === 0) { //사진 있다면 첫번째사진 없다면 null
+              fvo = null;
+            } else {
+              fvo = BoardUserDTO[i].flist[0];
+            }
+    
+            //사진 유무 따라 midBox변경
+            if (fvo === null) {
+              midBox = `<div class="titleBox midBox" >
+                ${bvo.title}
+              </div>`;
+            } else {
+              midBox = `<img class="thumbnail midBox" src="/upload/${fvo.saveDir.replace(/\\/g, '/')}/${fvo.uuid}_${fvo.fileName}" alt="이미지" >`;
+            }
+
+            //좋아요
+            let str = bvo.likeUser; //좋아요 문자열(#aa#bb#cc)
+            let likeUserArr = []; //좋아요 배열(aa, bb, cc)
+            let likeCount = 0; //좋아요 개수
+            let isLike = false; //좋아요 눌림상태
+            let buttonStr = ""; //만들어질 좋아요 버튼
+            //좋아요 문자열을 좋아요 배열로 변경
+            if (str !== null) {
+              likeUserArr = str.split('#').filter(function (item) {
+                return item !== '';
+              });
+            }
+            //좋아요 눌렀었나?
+            for (let j = 0; j < likeUserArr.length; j++) {
+              let likeUser = likeUserArr[j];
+              if (likeUser === sesId) {
+                isLike = true;
+                break;
+              }
+              likeCount++;
+            }
+            //알맞은 좋아요 버튼 생성
+            if (bvo.id != sesId) {
+              if (isLike) {
+                buttonStr = `<i class="bi bi-heart-fill hateBtn"></i>`;
+              } else {
+                buttonStr = ` <i class="bi bi-heart likeBtn"></i>`;
+              }
+            }
+
+            //pp div생성
+            previousDiv.insertAdjacentHTML('afterend', `
+            <div class="pp" id="box${lastid+1}">
+              <div class="contentBox" data-bno="${bvo.bno}" data-title="${bvo.title}" data-boardid="${bvo.id}">
+                ${midBox}
+                <div class="overlayBox" onclick="window.location.href = '/board/detail?bno=${bvo.bno}';"></div>
+                <div class="profile hid hiddenText">
+                  <a href="/member/mypage?id=${bvo.id}"><img alt="" src="/upload/profile/${uvo.imgFile}" style="width: 30px; height: 30px;"></a>
+                  <a href="/member/mypage?id=${bvo.id}">${uvo.name}</a>
+                </div>
+                <div class="minBox">
+                  <span class="tspan hid hiddenText">${likeCount}</span>
+                  ${buttonStr}
+              </div>
+              </div>
+            </div>
+            `);
+
+            console.log('div' + lastid + '생성!');
+            lastid++;
+
+          }
+          pag ++;
+          console.log("다음 페이지: " + pag);
+          isHandlingScroll = false; // 실행 종료 표시
+
+        }
+        toggleClass();
+      })
+      
+    } else {
+      isHandlingScroll = false; // 실행 종료 표시
+    }
+  } else {
+    console.log('요소를 찾을 수 없습니다.');
+  }
+}
+
+
+
+// 스크롤 이벤트에 handleScroll 함수를 연결합니다.
+window.addEventListener('scroll', handleScroll);
+
+// 페이지All 가지고오기
+async function getBoardList(pageNo, keyword, qty) {
+  console.log("가지고온 페이지: " + pageNo);
+  try {
+    const resp = await fetch('/board/glist/' + pageNo + '-' + keyword +'-'+qty);
+    const result = await resp.json();
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+
+}
+
+
+//클릭이벤트
+document.addEventListener('click', (e) => {
+  console.log('클릭');
+  if (e.target.classList.contains('likeBtn')){ //좋아요
+    console.log('좋아요');
+
+    const div = e.target.closest('.contentBox');
+    const bno = div.dataset.bno;
+    const title = div.dataset.title;
+    const boardid = div.dataset.boardid;
+
+    likeToggle(e, bno);
+    const pushType = 0; //좋아요는 0 ,댓글은 1
+    putAlarm(bno, title, boardid, sesId, sesName, pushType);
+
+  }else if (e.target.classList.contains('hateBtn')){//좋아요 취소
+    console.log('좋아요 취소');
+
+    const div = e.target.closest('.contentBox');
+    const bno = div.dataset.bno;
+
+    likeToggle(e, bno);
+  }
+
+});
+
+//좋아요 토글
+function likeToggle(e,bno){
+  e.target.classList.toggle('likeBtn');
+  e.target.classList.toggle('hateBtn');
+  e.target.classList.toggle('bi-heart-fill');
+  e.target.classList.toggle('bi-heart');
+
+  DBlikeToggle(bno, sesId).then(result => {
+    let tspan = e.target.closest('div').querySelector('.tspan');
+    tspan.textContent = result;
+  });
+}
+
+// 좋아요 변환
+async function DBlikeToggle(bno, sesId) {
+  try {
+    const url = '/board/likeToggle/' + bno + "/" + sesId;
+    const config = { method: 'put' };
+    const resp = await fetch(url, config);
+    const result = await resp.text();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//마우스 오버 이벤트
+function toggleClass() {
+  let contentBoxes = document.querySelectorAll('.contentBox');
+  console.log(contentBoxes);
+
+  contentBoxes.forEach((contentBox) => {
+    // 마우스 올렸을 때 
+    contentBox.addEventListener('mouseenter', (e) => {
+      const target =  e.currentTarget;
+      target.querySelectorAll('.hid').forEach((element) => {
+        element.classList.remove('hiddenText');
+      });
+    });
+
+    // 마우스 나갔을 때
+    contentBox.addEventListener('mouseleave', (e) => {
+      const target =  e.currentTarget;
+      target.querySelectorAll('.hid').forEach((element) => {
+        element.classList.add('hiddenText');
+      });
+    });
+  });
+}
+
+toggleClass();
+
+// 알람 DB에 저장
+async function putAlarm(bno, title, boardid, sesId, sesName, pushType) {
+  try {
+    const url = "/alarm/push";
+    const data = {
+      bno: bno,
+      title: title,
+      id: boardid,
+      pushId: sesId,
+      pushName: sesName,
+      pushType: pushType
+    };
+    const config = {
+      method: 'post',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const resp = await fetch(url, config);
+    const result = await resp.text();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// //신고
+// document.getElementById('listBlackBtn').addEventListener('click',()=>{
+//   let bno = document.getElementById('listBlackBtn').dataset.id;
+//   listBlackPlus(bno);
+// })
+// async function listBlackPlus(bno) {
+//   try {
+//     const url = '/board/listBlackPlus/' + bno;
+//     const config = { method: 'put' };
+//     const resp = await fetch(url, config);
+//     const result = await resp.text();
+//     return result;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+
+
+
+
+//댓글
+
+const emojiList = ['😃', '👍', '❤️', '😊', '🎉'];
+
+
+document.getElementById('toggleComment').addEventListener('click', () => {
+    // commentContainer 요소에 대한 참조 가져오기
+    const commentContainer = document.getElementById('commentContainer');
+    const tH1 = document.getElementById('tH1');
+    // commentContainer 요소의 가시성(visibility) 토글
+    if (commentContainer.style.display === 'none') {
+        tH1.innerText= '';
+        tH1.innerHTML= '댓글 ▽';
+        commentContainer.style.display = 'block';
+    } else {
+        tH1.innerText= '';
+        tH1.innerHTML= '댓글 ▷';
+        commentContainer.style.display = 'none';
+    }
+});
+
+const likeImg = document.getElementById('likeImg');
+let liked = false;
+
+likeImg.addEventListener('click', () => {
+  liked = !liked; // 클릭할 때마다 liked 변수를 토글합니다.
+
+  // liked 변수의 상태에 따라 하트 이모지의 색상 클래스를 toggle합니다.
+  if (liked) {
+    likeImg.innerText = '❤️';
+    likeImg.classList.add('red-heart'); // red-heart 클래스 추가
+  } else {
+    likeImg.innerText = '🤍';
+    likeImg.classList.remove('red-heart'); // red-heart 클래스 제거
+  }
+});
+
+async function postCommentToServer(cmtData) {
+    try {
+        const url = '/comment/post';
+        const config = {
+            method: "post",
+            headers: {
+                'content-type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify(cmtData)
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text(); //isOK
+        return result;
+    } catch (err) {
+        console.log(err);
+    }
+}
+//댓글등록
+document.getElementById('cmtPostBtn').addEventListener('click', (e) => {
+    const cmtText = document.getElementById('floatingInputGroup1').value;
+    const bno = e.target.dataset.bno; // data-bno 값 가져오기
+    const title = e.target.dataset.title; // data-title 값 가져오기
+    const boardid = e.target.dataset.boardid; // data-boardid 값 가져오기
+    const cmtid=e.target.dataset.cmtid;
+
+
+   
+    console.log(cmtText);
+    if (cmtText === "" || cmtText === null) {
+        alert("내용을 입력해주세요");
+        document.getElementById('floatingInputGroup1').focus();
+        return false;
+    } else {
+        let cmtData = {
+            bno: bnoVal,
+            id: cmtid,
+            ccontent: cmtText
+        };
+        console.log(cmtData);
+        const pushType = 1;
+        putAlarm(bno, title, boardid, sesId, sesName, pushType);
+        postCommentToServer(cmtData).then(result => {
+            //isOk 확인 데이터
+            if (result > 0) {
+                alert("댓글 등록이 완료되었습니다.");
+                getCommentList(cmtData.bno);
+                document.getElementById('floatingInputGroup1').value = '';
+            }
+        });
+    }
+});
+
+document.getElementById('emojiBtn').addEventListener('click', () => {
+    const emojiContainer = document.getElementById('emojiContainer'); // 이모티콘 목록을 담을 요소
+
+
+
+    emojiContainer.innerHTML = ''; // 목록을 비웁니다
+    emojiList.forEach(emoji => {
+        const emojiButton = document.createElement('button');
+        emojiButton.classList.add('emojiItem');
+        emojiButton.textContent = emoji;
+
+        emojiButton.addEventListener('click', () => {
+            const cmtText = document.getElementById('floatingInputGroup1');
+            cmtText.value += emoji; // 선택한 이모티콘을 댓글 텍스트 필드에 추가합니다
+            emojiContainer.innerHTML = ''; // 이모티콘 목록을 숨깁니다
+        });
+        emojiContainer.appendChild(emojiButton);
+    });
+});
+
+async function spreadCommentFromServer(bno) {
+    console.log(bno);
+    try {
+        const resp = await fetch('/comment/' + bno);
+        const result = await resp.json();
+        return result;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function getCommentList(bno){
+  spreadCommentFromServer(bno).then((result)=>{
+    
+
+    const ul=document.getElementById('cmtListArea');
+    if(result!=''||result!=null){
+      ul.innerHTML='';
+      const ulist=result.ulist;
+      const clist=result.clist;
+      let i=0;
+      for(let cvo of clist){
+        let uvo=ulist[i];
+        console.log(cvo);
+        console.log(uvo);
+
+        
+        const li = document.createElement('li');
+        li.setAttribute('data-cno', cvo.cno);
+
+        const div1 = document.createElement('div');
+        const link = document.createElement('a');
+        link.href = `/member/mypage?id=${cvo.id}`;
+
+        const idSpan = document.createElement('span');
+        const imgspan=document.createElement('img');
+        imgspan.src=`/upload/profile/${uvo.imgFile}`;
+        imgspan.classList.add('profilecss');
+        idSpan.classList.add('idbox');
+        idSpan.textContent = uvo.name;
+        link.appendChild(imgspan);
+        link.appendChild(idSpan);
+        div1.appendChild(link);
+
+        const contentSpan = document.createElement('span');
+        contentSpan.textContent = cvo.ccontent;
+        contentSpan.classList.add('contentspan');
+        div1.appendChild(contentSpan);
+        li.appendChild(div1);
+
+        const div2 = document.createElement('div');
+        div2.classList.add('datebox');
+        const dateSpan = document.createElement('span');
+        dateSpan.textContent = cvo.regDate;
+        div2.appendChild(dateSpan);
+
+        const menuSpan = document.createElement('span');
+        menuSpan.classList.add('material-symbols-outlined');
+        menuSpan.classList.add('menu');
+        menuSpan.textContent = 'more_horiz';
+        menuSpan.addEventListener('click', () => {
+          const buttonDiv = div2.querySelector('.button-div');
+
+          // Toggle visibility of the buttons by adding/removing a class
+          if (buttonDiv) {
+            buttonDiv.remove();
+          } else {
+            const newDiv = document.createElement('div');
+            newDiv.classList.add('button-div');
+            if (cvo.id === sesVal) {
+              console.log('이것은 제 댓글입니다.');
+              const modBtn = document.createElement('button');
+              modBtn.type = 'button';
+              modBtn.classList.add('modBtn');
+              modBtn.classList.add('btncss');
+              modBtn.textContent = '수정';
+              newDiv.appendChild(modBtn);
+
+              const delBtn = document.createElement('button');
+              delBtn.type = 'button';
+              delBtn.classList.add('delBtn');
+              delBtn.classList.add('btncss');
+              delBtn.textContent = '삭제';
+              newDiv.appendChild(delBtn);
+            } else {
+              console.log('내 댓글 아님',cvo.id, sesVal);
+              const reportBtn = document.createElement('button');
+              reportBtn.type = 'button';
+              reportBtn.classList.add('blackBtn');
+              reportBtn.classList.add('btncss');
+              reportBtn.textContent = '신고';
+              newDiv.appendChild(reportBtn);
+            }
+
+            div2.appendChild(newDiv);
+          }
+        });
+        div2.appendChild(menuSpan);
+
+        li.appendChild(div2);
+
+        ul.appendChild(li);
+        document.getElementById('tH1').innerText=`댓글 ${i+1}개`;
+        i++;
+      }
+    } else {
+      // 등록된 댓글이 없는 경우
+      let li = `<li>등록된 댓글이 없습니다.</li>`;
+      ul.innerHTML += li;
+    }
+  });
+}
+
+
+
+
+
+//댓글수정
+async function editCommentToServer(cmtDataMod) {
+    try {
+        const url = '/comment/' + cmtDataMod.cno;
+        const config = {
+            method: 'put',
+            headers: {
+                'content-type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify(cmtDataMod)
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result;
+    } catch (err) {
+        console.log(err);
+    }
+}
+//댓글삭제
+async function removeCommentToServer(cno) {
+    try {
+        const url = '/comment/' + cno;
+        const config = {
+            method: 'delete'
+        };
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+document.addEventListener('click', e => {
+    console.log(e.target);
+
+
+    if (e.target.classList.contains('thImg')) {
+        
+      e.preventDefault();
+  
+      // 클릭된 thumb 엘리먼트의 ID 가져오기
+      const clickedThumbID = e.target.id;
+        console.log(clickedThumbID);
+      // thumb 엘리먼트의 ID와 일치하는 data-bs-slide-to 값 찾기
+      const slideToElements = document.querySelectorAll("[data-bs-slide-to]");
+    console.log(slideToElements);
+      let targetSlideTo;
+      for (const slideToElement of slideToElements) {
+        if (slideToElement.getAttribute("data-bs-slide-to") === clickedThumbID) {
+          targetSlideTo = slideToElement;
+          console.log(targetSlideTo);
+          break;
+        }
+      }
+  
+      // 찾은 data-bs-slide-to의 li 엘리먼트 클릭 이벤트 발생 시키기
+      if (targetSlideTo) {
+        targetSlideTo.click();
+      }
+    }
+
+
+    if (e.target.classList.contains('modBtn')) {
+        console.log("수정버튼 클릭시");
+        //내가 클릭한 버튼의 댓글 뭉치
+        
+        let li = e.target.closest('li');
+        let cnoVal = li.dataset.cno;
+        let textContent = li.querySelector('.contentspan').textContent;
+        console.log("cno / content   => " + cnoVal + "  " + textContent);
+      //li.querySelector('.contentspan').innerHTML=`<input type="text" class="newcmt" value="${textContent}">`;
+      if (!li.querySelector('.newcmt')) {
+        li.querySelector('.contentspan').innerHTML = `<input type="text" class="newcmt" value="${textContent}">`;
+      } else {
+        // input 요소가 이미 존재하는 경우에는 변경된 내용을 적용
+        let newContent = li.querySelector('.newcmt').value;
+        li.querySelector('.contentspan').textContent = newContent;
+        let cmtDataMod = {
+          cno: cnoVal,
+          ccontent: newContent
+      };
+      console.log(cmtDataMod);
+      //서버 연결
+      editCommentToServer(cmtDataMod).then(result => {
+          if (parseInt(result) > 0) {
+              alert('댓글 수정이 완료되었습니다.');
+          }
+          getCommentList(bnoVal);
+      });
+      }  
+
+      // let cmtDataMod = {
+      //       cno: cnoVal,
+      //       ccontent: textContent
+      //   };
+      //   console.log(cmtDataMod);
+      //   //서버 연결
+      //   editCommentToServer(cmtDataMod).then(result => {
+      //       if (parseInt(result) > 0) {
+      //           alert('댓글 수정이 완료되었습니다.');
+      //       }
+      //       getCommentList(bnoVal);
+      //   });
+    } else if (e.target.classList.contains('delBtn')) {
+        console.log("삭제버튼 클릭시");
+        let li = e.target.closest('li');
+        let cnoVal = li.dataset.cno;
+        console.log(cnoVal);
+        removeCommentToServer(cnoVal).then(result => {
+            if (result > 0) {
+                alert('댓글 삭제가 완료되었습니다.');
+            }
+            getCommentList(bnoVal);
+        });
+    }
+});
+
+//알람
+async function putAlarm(bno, title, boardid, sesId, sesName, pushType) {
+    try {
+      const url = "/alarm/push";
+      const data = {
+        bno: bno,
+        title: title,
+        id: boardid,
+        pushId: sesId,
+        pushName: sesName,
+        pushType: pushType
+      };
+      const config = {
+        method: 'post',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      const resp = await fetch(url, config);
+      const result = await resp.text();
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }

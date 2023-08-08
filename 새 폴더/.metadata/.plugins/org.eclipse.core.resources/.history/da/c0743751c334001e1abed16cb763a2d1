@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+.njBBingBox {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.njtextBox {
+	width: auto;
+	height: 100px;
+	background-color: gray;
+	text-align: center;
+}
+
+.joinBigBox {
+	position: relative;
+	overflow: hidden;
+	height: 600px;
+	width: 600px;
+	background-color: #ff80c0;
+}
+
+.joinMidBox {
+	position: absolute;
+	width: 1800px;
+	background-color: #80ffff;
+	font-size: 0;
+	transition: transform 0.3s ease-out;
+}
+
+.joinMinBox {
+	display: inline-block;
+	width: 600px;
+	height: 600px;
+	padding: 10px;
+	font-size: 11px;
+	position: relative;
+}
+
+.joinMinBox1 {
+	background-color: #ff8000;
+}
+
+.joinMinBox2 {
+	background-color: #87f38f;
+}
+
+.joinMinBox3 {
+	background-color: #8080ff;
+}
+
+.njallbten {
+	width: 60px;
+	height: 20px;
+	position: absolute;
+	bottom: 10px;
+}
+
+.nextb, .finb {
+	right: 10px;
+}
+
+.previousb {
+	left: 10px;
+}

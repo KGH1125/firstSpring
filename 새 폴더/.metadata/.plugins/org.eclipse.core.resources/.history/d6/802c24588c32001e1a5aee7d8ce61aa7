@@ -1,0 +1,179 @@
+@font-face {
+	font-family: "galmuri";
+	src: url("/resources/fonts/Galmuri9.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "stardust";
+	src: url("/resources/fonts/PF스타더스트.ttf") format("truetype");
+}
+
+body {
+	font-family: "stardust", sans-serif !important;
+	font-size: 18px !important;
+	/* font-weight: 600 !important; */
+}
+
+.container {
+	min-width: 540px;
+	background: white;
+	border-radius: 30px;
+	padding: 10px;
+	background: white;
+	transition: width 0.3s ease;
+	margin-bottom: 5vh;
+}
+
+.back {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 25px;
+	color: white;
+	cursor: pointer;
+}
+
+.boardBox {
+	position: relative;
+	display: inline-block;
+	width: 50%;
+	float: left;
+	padding: 10px;
+}
+
+.dropBox {
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 50%;
+	min-height: 600px;
+	overflow: auto;
+	border-radius: 30px;
+	border: 4px dashed #ddd;
+	z-index: 1;
+}
+
+.titleInputBox, .contentInputBox {
+	border-radius: 10px;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.titleInputBox {
+	height: 45px;
+	font-size: 20px;
+}
+
+.contentInputBox {
+	height: 380px;
+	resize: none;
+}
+
+.tagInputBox {
+	margin-bottom: 10px;
+	border-radius: 10px;
+	width: 100%;
+}
+
+.bigimgbox {
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+
+.uplodbtn {
+	width: 100%;
+}
+
+.carousel-item img {
+	width: 100%;
+	height: auto;
+}
+/*썸네일박스  */
+.thBox {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+}
+/* 썸네일이미지 */
+.thumb {
+	flex: 0 0 auto;
+	margin-right: 10px;
+	display: inline-block;
+	position: relative;
+}
+.thumb img{
+	border-radius: 10px;
+}
+
+.delete-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	color: black;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+#trigger {
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* 미디어 쿼리 */
+@media screen and (max-width: 991px) {
+	/* 화면 너비가 768px 이하일 때 적용되는 스타일 */
+	.container {
+		flex-direction: column;
+		align-items: center;
+	}
+	.boardBox {
+		width: 100%;
+	}
+	.dropBox {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+}
+
+.preview-image {
+	width: 500px;
+	height: 500px;
+}
+
+
+@import	url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+.bigtitleBox{
+	width: 100%;
+	background-color: red;	
+}
+.titleh1{
+	display: inline-block;
+	font-size: 35px;
+	
+}
+.boardinfor{
+	margin-top:20px;
+	float: right;
+	color: gray;
+	display: inline-block;
+	
+}
+.mintitlebox{
+	display:inline-block;
+	color: gray;
+	font-size: 15px;
+}
+.boardinfor a{color:black;}
+.boardinfor a:visited{color:black;}
+
+/* 사진 유뮤에따른 구분 */
+
+	
+	
+	
+	
+	

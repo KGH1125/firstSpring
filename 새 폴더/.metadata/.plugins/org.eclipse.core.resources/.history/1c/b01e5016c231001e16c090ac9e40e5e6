@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+h1 {
+  color: white; 
+}
+
+.accordion {
+	width:auto;
+  cursor: pointer;
+  padding: 18px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  transition: 0.4s;
+  margin-left: 300px; /* 왼쪽 여백을 20px로 설정합니다. 원하는 여백 크기로 수정하세요. */
+  margin-right: 300px; /* 오른쪽 여백을 20px로 설정합니다. 원하는 여백 크기로 수정하세요. */
+
+}
+.accordion-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.active {
+  background-color: #ccc;
+}
+
+.panel {
+  display: none;
+  overflow: hidden;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  min-height: 200px; /* 최소 높이 */
+  color: white;
+  margin: 0 300px; /* 좌우 여백을 20px로 설정합니다. 원하는 여백 크기로 수정하세요. */
+
+}
+
+.patch-content {
+  font-size: 16px; /* 원하는 글자 크기로 수정하세요 */
+}
+
+/* 페이지 상단 이동 버튼 스타일 */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s;
+}
+
+.scroll-to-top-btn:hover {
+    background-color: #aaa;
+}
+h1{text-align: center;}

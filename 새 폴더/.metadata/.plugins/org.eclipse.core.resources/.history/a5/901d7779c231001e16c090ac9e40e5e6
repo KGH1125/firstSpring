@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.patch_box {
+	position: absolute;
+	left: 50%;
+	top: 10%;
+	transform: translateX(-50%);
+	background-color: none;
+	width: 80vw;
+	font-size: 0;
+}
+
+.pbutton1 {
+	width: 100%;
+	height: 80px;
+	border: groove;
+	background-color: #c0c0c0;
+	color: black;
+	font-size: 22px;
+	text-align: left;
+	padding: 10px;
+	font-weight: bold
+}
+
+/* 짝수 버튼에 색상 적용 */
+.pev {
+	background-color: #808080;
+	color: white;
+}
+
+.phide1 {
+	height: 0;
+}
+
+.pshow {
+	height: 240vh;
+	background-color: rgba(128, 128, 128, 0.3); /* 반투명 회색 배경색 설정 */
+	pointer-events: none; /* 배경 클릭 이벤트 무시 */
+	z-index: -1; /* 배경을 글자 뒤로 보내기 위해 음수 값을 적용 */
+}
+
+.patchpre {
+	padding-left: 10px;
+	font-size : 16px;
+	color: white;
+	margin: 0;
+	width: 100%;
+	transition: height 0.3s ease;
+	font-size: 16px;
+}
+
+.ph1 h1 {
+	background: none;
+	color: white;
+	margin-bottom: 20px;
+}
+
+.patch-image {
+	width: auto;
+	height: 20vw;
+}
+
+/* 페이지 상단 이동 버튼 스타일 */
+.scroll-to-top-btn {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 40px;
+	height: 40px;
+	background-color: #ccc;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	font-size: 20px;
+	transition: background-color 0.3s;
+}
+
+.scroll-to-top-btn:hover {
+	background-color: #aaa;
+}
+
+.lastpbox {
+	margin-bottom: 70px;
+}
+
+pre span {
+	width: 100%;
+	display: inline-block;
+	text-align: right;
+}

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+.blackMain {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 80%;
+	min-width: 800px;
+	max-width: 1100px;
+}
+
+.blacktable {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: white;
+	border-collapse: collapse;
+}
+
+td a:visited {
+	color: black;
+}
+
+td a {
+	color: black;
+}
+
+.blacktable td {
+	border-top: 1px solid black;
+}
+
+.blacktable th {
+	text-align: center;
+}
+
+.blacktable :nth-child(1) {
+	width: 100px;
+}
+
+.blacktable :nth-child(2), .blacktable :nth-child(3), .blacktable :nth-child(4)
+	{
+	padding-left: 5px;
+}
+
+.blacktable :nth-child(5), .blacktable :nth-child(6), .blacktable :nth-child(8)
+	{
+	width: 55px;
+	text-align: center;
+}
+
+.blacktable :nth-child(4) {
+	width: 100px;
+}
+
+.blacktable :nth-child(7) {
+	width: 150px;
+	text-align: center;
+}
+
+.blacktable th {
+	background-color: #808080;
+}
+
+.blacktable tr:hover {
+	background-color: #808080;
+}
+
+.oby {
+	color: red;
+}
+
+#comment-table th.asc::after {
+	content: " ▲";
+}
+
+#comment-table th.desc::after {
+	content: " ▼";
+}

@@ -1,0 +1,172 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="../../resources/css/user/userModify.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+<jsp:include page="../layout/header.jsp"></jsp:include>
+
+<div class="joinbox">
+
+<form action="/member/modify" method="post" enctype="multipart/form-data">
+	<div style="width: 500px;">
+		<div class="accordion" id="accordionPanelsStayOpenExample">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+						aria-controls="panelsStayOpen-collapseOne">프로필 수정</button>
+				</h2>
+				<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingOne">
+					<div class="accordion-body">
+					
+					
+					<div class="imgbox">
+					    <div id="previewbox">
+					    <img alt="" src="/upload/profile/${uvo.imgFile }"  id="preview">
+					    </div>
+					    <!-- Button trigger modal -->
+					    <button type="button" class="btn btn-primary profileBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="close">프로필 사진 변경</button>
+					   <input type="file" name="img" id="file" accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif" style="display: none" onchange="previewImage(this)">
+					    </div>
+					    
+					    
+					    <div class="modifyinputbox">
+					    <div class="boxbox">
+					    <div class="jointitle">아이디</div>
+					    <input type="text" name="id" value="${uvo.id }" readonly="readonly"></div>
+					     <div class="boxbox">
+					    <div class="jointitle">닉네임</div>
+					    <input type="text" name="name" value="${uvo.name }" maxlength="10">  </div>
+					    <div class="boxbox">
+					    <div class="jointitle">이메일</div>
+					     <input type="email" name="email" value="${uvo.email }">   </div>
+					     <div class="boxbox">
+					    <div class="jointitle">소개글</div>
+					    <textarea rows="3" cols="30" name="ucontent" maxlength="100">${uvo.ucontent }</textarea></div>
+					    
+					    </div>
+					</div>
+
+				</div>
+			</div>
+			<div class="accordion-item ">
+				<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+					<button class="accordion-button" type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseTwo">관심분야를 선택해주세요.</button>
+				</h2>
+				<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+				    <div class="accordion-body">
+				      <div class="tagbox">
+              <label for="checkbox1">
+                <input type="checkbox" value="광물" id="checkbox1" name="utag" class="tags" ${uvo.utag.contains("광물") ? "checked" : ""}>광물</label>
+                 <label for="checkbox2">
+                <input type="checkbox" value="pvp" id="checkbox2" name="utag" class="tags"${uvo.utag.contains("pvp") ? "checked" : ""}>pvp</label>
+                 <label for="checkbox3">
+                <input type="checkbox" value="야생" id="checkbox3" name="utag" class="tags" ${uvo.utag.contains("야생") ? "checked" : ""}>야생</label>
+                 <label for="checkbox4">
+                <input type="checkbox" value="건축" id="checkbox4" name="utag" class="tags" ${uvo.utag.contains("건축") ? "checked" : ""}>건축</label>
+                 <label for="checkbox5">
+                <input type="checkbox" value="모드" id="checkbox5" name="utag" class="tags" ${uvo.utag.contains("모드") ? "checked" : ""}>모드</label>
+                 <label for="checkbox6">
+                <input type="checkbox" value="플러그인" id="checkbox6" name="utag" class="tags" ${uvo.utag.contains("플러그인") ? "checked" : ""}>플러그인</label>
+                 <label for="checkbox7">
+                <input type="checkbox" value="스킨" id="checkbox7" name="utag" class="tags" ${uvo.utag.contains("스킨") ? "checked" : ""}>스킨</label>
+                 <label for="checkbox8">
+                <input type="checkbox" value="텍스쳐팩" id="checkbox8" name="utag" class="tags" ${uvo.utag.contains("텍스쳐팩") ? "checked" : ""}>텍스쳐팩</label>
+                 <label for="checkbox9">
+                <input type="checkbox" value="쉐이더" id="checkbox9" name="utag" class="tags" ${uvo.utag.contains("쉐이더") ? "checked" : ""}>쉐이더</label>
+               <label for="checkbox10">
+                <input type="checkbox" value="귀여운 사진" id="checkbox10" name="utag" class="tags" ${uvo.utag.contains("귀여운 사진") ? "checked" : ""}>귀여운 사진</label>
+                </div>
+				    
+				   
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<button type="submit" id="formBtn">저장</button>
+</form>
+<div class="pwchangeBtn">
+<a class="" data-bs-toggle="modal" href="#exampleModalToggle" role="button">비밀번호 변경을 원하십니까?</a>
+</div>
+</div>
+
+ <!-- Modal -->
+					    <div class="modal fade hidePrevented.bs.modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					        <div class="modal-dialog modal-lg modal-dialog-centered">
+					            <div class="modal-content">
+					                <div class="modal-header">
+					                    <h1 class="modal-title fs-5" id="staticBackdropLabel">프로필 사진 변경</h1>
+					                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					                </div>
+					                <div class="modal-body">
+					                    <div id="choiceImg">
+					                        <img class="profile_img" src="../../resources/images/profile/zombie.png"  onclick="showPreview('/resources/images/profile/zombie.png')">
+					                        <img class="profile_img" src="../../resources/images/profile/villager.png"  onclick="showPreview('/resources/images/profile/villager.png')">
+					                        <img class="profile_img" src="../../resources/images/profile/enderman.jpg"  onclick="showPreview('/resources/images/profile/enderman.jpg')">
+					                        <img class="profile_img" src="../../resources/images/profile/pig.jpg"  onclick="showPreview('/resources/images/profile/pig.jpg')">
+					                        <img class="profile_img" src="../../resources/images/profile/steve.jpg"  onclick="showPreview('/resources/images/profile/steve.jpg')">
+					                        <img id="mypic" src="../../resources/images/profile/24.png" alt="Preview" >
+					                        
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					    </div> 
+
+
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">비밀번호 변경</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        기존 비밀번호를 입력해주세요.
+        <input type="hidden" value="${ses.id }" name="id" id="id"> <br>
+                        <input type="password" class="form-control pwbox" id="oldPw">
+                       
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" id="checkBtn" data-bs-toggle="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="resultMent">
+       
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">이전</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="/resources/js/user/userModify.js"></script>
+
+</body>
+</html>

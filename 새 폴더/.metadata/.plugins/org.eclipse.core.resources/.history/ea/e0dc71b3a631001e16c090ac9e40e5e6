@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.blackMain{
+	position: absolute;
+	left: 50%;
+	transform:translateX(-50%);
+}
+.blacktable{
+	border-collapse: collapse;
+	background-color: white;
+}
+/* .headerr {
+	width: 100%;
+	height: 10px;
+	background-color: #ff0000;
+}
+
+.table-container {
+	width: 100%;
+	height: 80%;
+	margin-top: 5vh;
+	padding: 1px 25vw 1px 25vw;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+
+
+.oby {
+	color: red;
+}
+ */
+
+#comment-table th.asc::after {
+	content: " ▲";
+}
+
+#comment-table th.desc::after {
+	content: " ▼";
+}

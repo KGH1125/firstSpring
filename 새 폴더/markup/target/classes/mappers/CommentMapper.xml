@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.markup.www.repository.CommentDAO">
+
+	<insert id="insert">
+		insert into comment(bno, id, c_content)
+		values(#{bno}, #{id}, #{ccontent})
+	</insert>
+
+	<select id="getList"
+		resultType="com.markup.www.domain.CommentVO">
+		select * from comment where bno = #{bno} and is_Del=0;
+	</select>
+
+	<select id="getblackcomment"
+		resultType="com.markup.www.domain.CommentVO">
+		select * from comment where black >= 3; <!-- 신고회수가 3이상인 댓글 가져온다. -->
+	</select>
+
+	<update id="update">
+		update comment set c_content=#{ccontent} where
+		cno=#{cno}
+	</update>
+
+	<update id="delete">
+		update comment set is_Del = 1 where cno = #{cno}
+	</update>
+	<update id="restoreComment">
+		update comment set is_Del=0 where cno = #{cno}
+	</update>
+	<update id="blackComment">
+	update comment set black=black+1 where cno=#{cno};
+	</update>
+
+
+</mapper>

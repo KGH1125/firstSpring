@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.headerr {
+	width: 100%;
+	height: 10px;
+	background-color: #ff0000;
+}
+
+.table-container {
+	width: 100%;
+	height: 80%;
+	margin-top: 5vh;
+	padding: 1px 25vw 1px 25vw;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+
+
+.oby {
+	color: red;
+}
+
+.btn-5 {
+
+	line-height: 42px;
+	padding: 0;
+	border: 1px solid black;
+}
+
+#comment-table th.asc::after {
+	content: " ▲";
+}
+
+#comment-table th.desc::after {
+	content: " ▼";
+}

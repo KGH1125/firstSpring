@@ -1,0 +1,123 @@
+@font-face {
+	font-family: "galmuri";
+	src: url("/resources/fonts/Galmuri9.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "stardust";
+	src: url("/resources/fonts/PF스타더스트.ttf") format("truetype");
+}
+
+body {
+	font-family: "stardust", sans-serif !important;
+	font-size: 18px !important;
+	/* font-weight: 600 !important; */
+}
+
+
+.container {
+	position: relative;
+	background: white;
+	border-radius: 30px;
+	padding: 10px;
+}
+
+.back {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 25px;
+	color: white;
+	cursor: pointer;
+}
+
+.boardBox {
+	
+}
+
+.dropBox {
+	width: 600px;
+	height: 600px;
+	overflow: auto;
+	border-radius: 30px;
+	border: 4px dashed #ddd;
+	z-index: 1;
+}
+
+.carousel-item img {
+	width: 100%;
+	height: auto;
+}
+
+.thBox {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+}
+
+.thumb {
+	flex: 0 0 auto;
+	margin-right: 10px;
+	position: relative;
+	display: inline-block;
+}
+
+.delete-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: gray;
+	color: white;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+}
+
+
+
+#trigger {
+	/* 기존 스타일 유지 */
+	position: absolute; /* 추가 */
+	top: 50%; /* 추가 */
+	left: 50%; /* 추가 */
+	transform: translate(-50%, -50%); /* 추가 */
+}
+
+/* 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+	/* 화면 너비가 768px 이하일 때 적용되는 스타일 */
+	.container {
+		flex-direction: column;
+		align-items: center;
+	}
+	.boardBox {
+		margin-bottom: 10px;
+	}
+	.dropBox {
+		width: 500px;
+		height: 700px;
+	}
+}
+
+.preview-image {
+	width: 500px;
+	height: 500px;
+}
+
+/* ----------- */
+@import
+	url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css')
+	;
+
+.tagify {
+	width: 100%;
+	max-width: 700px;
+	border-radius: 10px;
+}

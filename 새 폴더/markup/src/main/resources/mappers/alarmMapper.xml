@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.markup.www.repository.AlarmDAO">
+<insert id="pushalarm">
+	insert into alarm(bno, title, id, push_id, push_name, push_type) values(#{bno}, #{title}, #{id}, #{pushId}, #{pushName}, #{pushType})
+</insert>
+<select id="getAlarm" resultType="com.markup.www.domain.AlarmVO">
+	select * from alarm where id = #{id} order by push_date desc limit 30
+</select>
+<update id="updateIsCheck">
+	update alarm set is_check = 1 where ano = #{ano}
+</update>
+</mapper>
+
